@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/workflows/build-static-node.yml'
       - 'staticnode/**'
-    push:
+  push:
 
 jobs:
   build:
