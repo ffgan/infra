@@ -10,7 +10,7 @@ WORKDIR /build
 
 RUN ARCH=$(uname -m) && \
     if [ "$ARCH" = "riscv64" ]; then \
-        apk add --no-cache binutils-riscv64 curl g++ gcc gnupg libgcc linux-headers make python3 libstdc++; \
+        apk add --no-cache binutils curl g++ gcc gnupg libgcc linux-headers make python3 libstdc++; \
     else \
         apk add --no-cache binutils-gold curl g++ gcc gnupg libgcc linux-headers make python3 libstdc++; \
     fi
