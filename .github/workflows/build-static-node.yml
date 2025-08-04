@@ -31,7 +31,7 @@ jobs:
         source ./staticnode/node-version.sh
         echo "NODE_VERSION=$NODE_VERSION" >> $GITHUB_ENV
         echo "NODE_SHA256SUM=$NODE_SHA256SUM" >> $GITHUB_ENV
-        arch=$(echo "${{ matrix.IMAGE.MANYLINUX_ARCH }}" | tr '[:upper:]' '[:lower:]')
+        arch=$(echo "${{ matrix.IMAGE.BUILD_ARCH }}" | tr '[:upper:]' '[:lower:]')
         echo "NODE_ARCH=$arch" >> $GITHUB_ENV
     -
       name: Set up QEMU
