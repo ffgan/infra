@@ -86,6 +86,16 @@ jobs:
           - {TAG_NAME: "cryptography-manylinux_2_28:ppc64le", DOCKERFILE_PATH: "cryptography-linux", BUILD_ARGS: "PYCA_RELEASE=manylinux_2_28_ppc64le", RUNNER: "ubuntu-24.04-ppc64le"}
           - {TAG_NAME: "cryptography-manylinux_2_34:ppc64le", DOCKERFILE_PATH: "cryptography-linux", BUILD_ARGS: "PYCA_RELEASE=manylinux_2_34_ppc64le", RUNNER: "ubuntu-24.04-ppc64le"}
 
+          # riscv64 distro images
+          - {TAG_NAME: "cryptography-runner-ubuntu-focal:riscv64", DOCKERFILE_PATH: "runners/ubuntu",DOCKER_PLATFORM: "linux/riscv64", BUILD_ARGS: "RELEASE=focal", RUNNER: "ubuntu-latest"}
+          - {TAG_NAME: "cryptography-runner-ubuntu-jammy:riscv64", DOCKERFILE_PATH: "runners/ubuntu",DOCKER_PLATFORM: "linux/riscv64", BUILD_ARGS: "RELEASE=jammy", RUNNER: "ubuntu-latest"}
+          - {TAG_NAME: "cryptography-runner-ubuntu-noble:riscv64", DOCKERFILE_PATH: "runners/ubuntu",DOCKER_PLATFORM: "linux/riscv64", BUILD_ARGS: "RELEASE=noble", RUNNER: "ubuntu-latest"}
+          - {TAG_NAME: "cryptography-runner-ubuntu-rolling:riscv64", DOCKERFILE_PATH: "runners/ubuntu",DOCKER_PLATFORM: "linux/riscv64", BUILD_ARGS: "RELEASE=rolling", RUNNER: "ubuntu-latest"}
+
+          # riscv64 manylinux images
+          - {TAG_NAME: "cryptography-manylinux_2_39:riscv64", DOCKERFILE_PATH: "cryptography-linux",DOCKER_PLATFORM: "linux/riscv64", BUILD_ARGS: "PYCA_RELEASE=manylinux_2_39_riscv64", RUNNER: "ubuntu-latest"}
+          - {TAG_NAME: "cryptography-musllinux_1_2:riscv64", DOCKERFILE_PATH: "cryptography-linux",DOCKER_PLATFORM: "linux/riscv64", BUILD_ARGS: "PYCA_RELEASE=musllinux_1_2_riscv64", RUNNER: "ubuntu-latest"}
+
     name: "${{ matrix.IMAGE.TAG_NAME }}"
     steps:
       - uses: actions/checkout@v4.2.2
@@ -107,6 +117,10 @@ jobs:
         run: |
           ATTEST_IMAGE=$(echo "${{ matrix.IMAGE.TAG_NAME }}" | cut -d ':' -f 1)
           echo "ATTEST_IMAGE=${ATTEST_IMAGE}" | tee -a "$GITHUB_OUTPUT"
+
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435  # v3.11.1
