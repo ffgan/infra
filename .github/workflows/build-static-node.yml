@@ -5,12 +5,6 @@ on:
     paths:
       - '.github/workflows/build-static-node.yml'
       - 'staticnode/**'
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/build-static-node.yml'
-      - 'staticnode/**'
 
 jobs:
   build:
@@ -24,6 +18,7 @@ jobs:
       matrix:
         IMAGE:
           - {RUNNER: "ubuntu-latest", MANYLINUX_ARCH: "x86_64"}
+          - {RUNNER: "ubuntu-latest", MANYLINUX_ARCH: "riscv64", DOCKER_PLATFORM:"--platform linux/riscv64"}
           - {RUNNER: "ubuntu-24.04-arm", MANYLINUX_ARCH: "aarch64"}
           - {RUNNER: "ubuntu-24.04-ppc64le", MANYLINUX_ARCH: "ppc64le"}
     steps:
@@ -37,14 +32,22 @@ jobs:
         echo "NODE_SHA256SUM=$NODE_SHA256SUM" >> $GITHUB_ENV
         arch=$(echo "${{ runner.arch }}" | tr '[:upper:]' '[:lower:]')
         echo "NODE_ARCH=$arch" >> $GITHUB_ENV
+    -
+      name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435  # v3.11.1
+      with:
+        cache-binary: false
     - name: Build the Docker image
       run: |
         echo building node.js $NODE_VERSION
-        docker build --tag ghcr.io/pyca/static-nodejs-$NODE_ARCH:$NODE_VERSION --build-arg VERSION=$NODE_VERSION --build-arg ARCH=$NODE_ARCH --build-arg SHA256SUM=$NODE_SHA256SUM staticnode
+        docker build --tag ghcr.io/pyca/static-nodejs-$NODE_ARCH:$NODE_VERSION --build-arg VERSION=$NODE_VERSION ${{ matrix.IMAGE.DOCKER_PLATFORM }} --build-arg ARCH=$NODE_ARCH --build-arg SHA256SUM=$NODE_SHA256SUM staticnode
     - name: Test static node.js on manylinux2014
       run: |
         cd staticnode
-        docker build -f Dockerfile-test -t test-node --build-arg MANYLINUX_ARCH=${{ matrix.IMAGE.MANYLINUX_ARCH }} --build-arg CONTAINER_NAME=ghcr.io/pyca/static-nodejs-$NODE_ARCH:$NODE_VERSION .
+        docker build -f Dockerfile-test -t test-node --build-arg MANYLINUX_ARCH=${{ matrix.IMAGE.MANYLINUX_ARCH }} ${{ matrix.IMAGE.DOCKER_PLATFORM }} --build-arg CONTAINER_NAME=ghcr.io/pyca/static-nodejs-$NODE_ARCH:$NODE_VERSION .
         docker run test-node /staticnode/bin/node -e "console.log('hello world'); console.log(process.version)"
     - name: Login to docker
       run: 'docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" ghcr.io'
