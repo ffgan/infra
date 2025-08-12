@@ -20,7 +20,7 @@ RUN mkdir -p /out/bin
 
 RUN curl -O https://nodejs.org/dist/$VERSION/node-$VERSION.tar.gz
 RUN echo "$SHA256SUM  node-$VERSION.tar.gz" | sha256sum -c -
-RUN tar -zxvf node-$VERSION.tar.gz
+RUN tar -zxf node-$VERSION.tar.gz
 
 # Patch OpenSSL configuration for RISC-V to remove -m64 flags
 RUN if [ "$ARCH" = "riscv64" ]; then \
