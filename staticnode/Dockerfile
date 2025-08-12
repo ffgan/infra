@@ -5,7 +5,7 @@ ARG ARCH
 # The sha256sum for the node source tarball
 ARG SHA256SUM
 
-RUN echo "uname -a"
+RUN uname -a
 
 RUN mkdir -p /build
 WORKDIR /build
