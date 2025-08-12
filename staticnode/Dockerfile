@@ -22,12 +22,6 @@ RUN curl -O https://nodejs.org/dist/$VERSION/node-$VERSION.tar.gz
 RUN echo "$SHA256SUM  node-$VERSION.tar.gz" | sha256sum -c -
 RUN tar -zxf node-$VERSION.tar.gz
 
-# Patch OpenSSL configuration for RISC-V to remove -m64 flags
-RUN if [ "$ARCH" = "riscv64" ]; then \
-        cd node-$VERSION && \
-        sed -i 's/-m64//g' deps/openssl/config/Makefile || true; \
-    fi
-
 RUN cd node-$VERSION && \
     case "$ARCH" in \
         ppc64le) CPU=ppc64 ;; \
