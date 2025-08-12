@@ -1,6 +1,6 @@
 FROM alpine:latest
 ARG VERSION
-# One of x64 or arm64 or ppc64le
+# One of x64 or arm64 or ppc64le or riscv64
 ARG ARCH
 # The sha256sum for the node source tarball
 ARG SHA256SUM
@@ -20,12 +20,33 @@ RUN curl -O https://nodejs.org/dist/$VERSION/node-$VERSION.tar.gz
 RUN echo "$SHA256SUM  node-$VERSION.tar.gz" | sha256sum -c -
 RUN tar -zxvf node-$VERSION.tar.gz
 
+# Patch OpenSSL configuration for RISC-V to remove -m64 flags
+RUN if [ "$ARCH" = "riscv64" ]; then \
+        cd node-$VERSION && \
+        sed -i 's/-m64//g' deps/openssl/openssl.gypi && \
+        sed -i 's/-m64//g' deps/openssl/config/Makefile || true; \
+    fi
+
 RUN cd node-$VERSION && \
     case "$ARCH" in \
-      ppc64le) CPU=ppc64 ;; \
-      *) CPU="$ARCH" ;; \
+        ppc64le) CPU=ppc64 ;; \
+        riscv64) CPU=riscv64 ;; \
+        *) CPU="$ARCH" ;; \
     esac && \
-    ./configure --dest-cpu=$CPU --fully-static && \
+    if [ "$ARCH" = "riscv64" ]; then \
+        # RISC-V specific configuration
+        export CC_host=gcc && \
+        export CXX_host=g++ && \
+        ./configure \
+            --dest-cpu=$CPU \
+            --fully-static \
+            --openssl-no-asm \
+            --without-intl \
+            --cross-compiling; \
+    else \
+        # Standard configuration for other architectures
+        ./configure --dest-cpu=$CPU --fully-static; \
+    fi && \
     make -j$(nproc)
 
 RUN cp /build/node-$VERSION/LICENSE /out/LICENSE && cp /build/node-$VERSION/out/Release/node /out/bin/node
