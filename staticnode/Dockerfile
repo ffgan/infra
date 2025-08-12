@@ -5,6 +5,8 @@ ARG ARCH
 # The sha256sum for the node source tarball
 ARG SHA256SUM
 
+RUN echo "uname -a"
+
 RUN mkdir -p /build
 WORKDIR /build
 
@@ -23,7 +25,6 @@ RUN tar -zxvf node-$VERSION.tar.gz
 # Patch OpenSSL configuration for RISC-V to remove -m64 flags
 RUN if [ "$ARCH" = "riscv64" ]; then \
         cd node-$VERSION && \
-        sed -i 's/-m64//g' deps/openssl/openssl.gypi && \
         sed -i 's/-m64//g' deps/openssl/config/Makefile || true; \
     fi
 
