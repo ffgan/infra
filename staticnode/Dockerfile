@@ -8,7 +8,12 @@ ARG SHA256SUM
 RUN mkdir -p /build
 WORKDIR /build
 
-RUN apk add --no-cache binutils-gold curl g++ gcc gnupg libgcc linux-headers make python3 libstdc++ patch
+# RUN apk add --no-cache binutils-gold curl g++ gcc gnupg libgcc linux-headers make python3 libstdc++ patch
+RUN if [ "$ARCH" = "riscv64" ]; then \
+        apk add --no-cache binutils curl g++ gcc gnupg libgcc linux-headers make python3 libstdc++ patch; \
+    else \
+        apk add --no-cache binutils-gold curl g++ gcc gnupg libgcc linux-headers make python3 libstdc++ patch; \
+    fi
 RUN mkdir -p /out/bin
 
 RUN curl -O https://nodejs.org/dist/$VERSION/node-$VERSION.tar.gz
