@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 ARG VERSION
 # One of x64 or arm64 or ppc64le
 ARG ARCH
@@ -33,8 +33,12 @@ RUN cd node-$VERSION && \
       ppc64le) CPU=ppc64 ;; \
       *) CPU="$ARCH" ;; \
     esac && \
-    ./configure --dest-cpu=$CPU --fully-static && \
-    make -j$(nproc)
+    if [ "$ARCH"=="riscv64" ];then \
+        ./configure --dest-cpu=$CPU --fully-static --openssl-no-asm; \
+    else \
+        ./configure --dest-cpu=$CPU --fully-static; \
+    fi && \
+     make -j$(nproc)
 
 RUN cp /build/node-$VERSION/LICENSE /out/LICENSE && cp /build/node-$VERSION/out/Release/node /out/bin/node
 
