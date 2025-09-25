@@ -178,7 +178,7 @@ jobs:
         if: (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
       - name: Build (and push if main) docker image
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
-        id: docker-build
+        id: docker-build-nonodejs
         with:
           context: ${{ matrix.IMAGE.DOCKERFILE_PATH }}
           cache-from: ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
