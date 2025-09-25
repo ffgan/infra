@@ -1,15 +1,15 @@
 name: Docker Image Builder
 
 on:
-  workflow_dispatch:
-  schedule:
-    # Run once a week on Fridays
-    - cron: "0 0 * * FRI"
-  pull_request:
-    paths:
-      - ".github/workflows/build-docker-images.yml"
-      - "runners/**"
-      - "cryptography-linux/**"
+  # workflow_dispatch:
+  # schedule:
+  #   # Run once a week on Fridays
+  #   - cron: "0 0 * * FRI"
+  # pull_request:
+  #   paths:
+  #     - ".github/workflows/build-docker-images.yml"
+  #     - "runners/**"
+  #     - "cryptography-linux/**"
   push:
     # branches:
     #   - main
