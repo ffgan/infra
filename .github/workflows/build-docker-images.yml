@@ -194,7 +194,9 @@ jobs:
         id: docker-build
         with:
           context: ${{ matrix.IMAGE.DOCKERFILE_WITH_NODEJS_PATH }}
-          cache-from: ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}
+          cache-from: |
+            ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}
+            ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
           tags: ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}
           platforms: ${{ matrix.IMAGE.DOCKER_PLATFORM }}
           pull: true
