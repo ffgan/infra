@@ -200,7 +200,6 @@ jobs:
             ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
           tags: ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}
           platforms: ${{ matrix.IMAGE.DOCKER_PLATFORM }}
-          pull: true
           build-args: |
             NODE20_ARCH_RELEASE=${{ env.NODE20_ARCH_RELEASE }}
             NODE24_ARCH_RELEASE=${{ env.NODE24_ARCH_RELEASE }}
