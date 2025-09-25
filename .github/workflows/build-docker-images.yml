@@ -201,7 +201,7 @@ jobs:
           build-args: |
             NODE20_ARCH_RELEASE=${{ env.NODE20_ARCH_RELEASE }}
             NODE24_ARCH_RELEASE=${{ env.NODE24_ARCH_RELEASE }}
-            BASE_IMAGE_TAG=ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
+            BASE_IMAGE_TAG=${{ matrix.IMAGE.TAG_NAME }}-nonodejs
             ${{ matrix.IMAGE.BUILD_ARGS }}
           push: ${{ (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' }}
 
