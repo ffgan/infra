@@ -205,7 +205,7 @@ jobs:
 
       - name: Build (and push if main) docker image with nodejs
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
-        if: ${{ matrix.IMAGE.DOCKER_PLATFORM }} != 'linux/riscv64'
+        if: ${{ matrix.IMAGE.DOCKER_PLATFORM != 'linux/riscv64' }} 
         id: docker-build
         with:
           context: ${{ matrix.IMAGE.DOCKERFILE_WITH_NODEJS_PATH }}
