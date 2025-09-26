@@ -195,16 +195,17 @@ jobs:
         id: docker-build-nonodejs
         with:
           context: ${{ matrix.IMAGE.DOCKERFILE_PATH }}
-          cache-from: ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
-          tags: ghcr.io/pyca/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
+          cache-from: ghcr.io/ffgan/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
+          tags: ghcr.io/ffgan/${{ matrix.IMAGE.TAG_NAME }}-nonodejs
           platforms: ${{ matrix.IMAGE.DOCKER_PLATFORM }}
           pull: true
           build-args: |
             ${{ matrix.IMAGE.BUILD_ARGS }}
-          push: ${{ (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' }}
+          push: true
 
       - name: Build (and push if main) docker image with nodejs
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
+        if: ${{ matrix.IMAGE.DOCKER_PLATFORM }} != 'linux/riscv64'
         id: docker-build
         with:
           context: ${{ matrix.IMAGE.DOCKERFILE_WITH_NODEJS_PATH }}
