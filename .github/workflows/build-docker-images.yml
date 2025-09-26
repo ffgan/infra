@@ -647,4 +647,4 @@ jobs:
           subject-name: "ghcr.io/ffgan/${{ steps.image-name.outputs.ATTEST_IMAGE }}"
           subject-digest: ${{ steps.docker-build.outputs.digest }}
           push-to-registry: true
-        if: (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') '
+        if: (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
