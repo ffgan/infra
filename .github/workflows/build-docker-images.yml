@@ -33,113 +33,120 @@ jobs:
       matrix:
         IMAGE:
           # x86-64 manylinux images
-          - {
-              TAG_NAME: "cryptography-manylinux2014:x86_64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux2014_x86_64",
-              RUNNER: "ubuntu-latest",
-            }
-          - {
-              TAG_NAME: "cryptography-manylinux_2_28:x86_64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_28_x86_64",
-              RUNNER: "ubuntu-latest",
-            }
-          - {
-              TAG_NAME: "cryptography-manylinux_2_34:x86_64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_34_x86_64",
-              RUNNER: "ubuntu-latest",
-            }
-          - {
-              TAG_NAME: "cryptography-musllinux_1_1:x86_64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=musllinux_1_1_x86_64",
-              RUNNER: "ubuntu-latest",
-            }
-          - {
-              TAG_NAME: "cryptography-musllinux_1_2:x86_64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=musllinux_1_2_x86_64",
-              RUNNER: "ubuntu-latest",
-            }
+          # - {
+          #     TAG_NAME: "cryptography-manylinux2014:x86_64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux2014_x86_64",
+          #     RUNNER: "ubuntu-latest",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-manylinux_2_28:x86_64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux_2_28_x86_64",
+          #     RUNNER: "ubuntu-latest",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-manylinux_2_34:x86_64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux_2_34_x86_64",
+          #     RUNNER: "ubuntu-latest",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-musllinux_1_1:x86_64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=musllinux_1_1_x86_64",
+          #     RUNNER: "ubuntu-latest",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-musllinux_1_2:x86_64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=musllinux_1_2_x86_64",
+          #     RUNNER: "ubuntu-latest",
+          #   }
 
-          # aarch64 manylinux images
-          - {
-              TAG_NAME: "cryptography-manylinux2014_aarch64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux2014_aarch64",
-              RUNNER: "ubuntu-24.04-arm",
-            }
-          - {
-              TAG_NAME: "cryptography-manylinux_2_28:aarch64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_28_aarch64",
-              RUNNER: "ubuntu-24.04-arm",
-            }
-          - {
-              TAG_NAME: "cryptography-manylinux_2_34:aarch64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_34_aarch64",
-              RUNNER: "ubuntu-24.04-arm",
-            }
-          - {
-              TAG_NAME: "cryptography-musllinux_1_1:aarch64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=musllinux_1_1_aarch64",
-              RUNNER: "ubuntu-24.04-arm",
-            }
-          - {
-              TAG_NAME: "cryptography-musllinux_1_2:aarch64",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=musllinux_1_2_aarch64",
-              RUNNER: "ubuntu-24.04-arm",
-            }
+          # # aarch64 manylinux images
+          # - {
+          #     TAG_NAME: "cryptography-manylinux2014_aarch64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux2014_aarch64",
+          #     RUNNER: "ubuntu-24.04-arm",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-manylinux_2_28:aarch64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux_2_28_aarch64",
+          #     RUNNER: "ubuntu-24.04-arm",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-manylinux_2_34:aarch64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux_2_34_aarch64",
+          #     RUNNER: "ubuntu-24.04-arm",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-musllinux_1_1:aarch64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=musllinux_1_1_aarch64",
+          #     RUNNER: "ubuntu-24.04-arm",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-musllinux_1_2:aarch64",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=musllinux_1_2_aarch64",
+          #     RUNNER: "ubuntu-24.04-arm",
+          #   }
 
-          # armv7l manylinux images
-          - {
-              TAG_NAME: "cryptography-manylinux_2_31:armv7l",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              DOCKER_PLATFORM: "linux/arm/v7",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_31_armv7l",
-              RUNNER: "ubuntu-24.04-arm",
-            }
-          - {
-              TAG_NAME: "cryptography-musllinux_1_2:armv7l",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              DOCKER_PLATFORM: "linux/arm/v7",
-              BUILD_ARGS: "PYCA_RELEASE=musllinux_1_2_armv7l",
-              RUNNER: "ubuntu-24.04-arm",
-            }
+          # # armv7l manylinux images
+          # - {
+          #     TAG_NAME: "cryptography-manylinux_2_31:armv7l",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     DOCKER_PLATFORM: "linux/arm/v7",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux_2_31_armv7l",
+          #     RUNNER: "ubuntu-24.04-arm",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-musllinux_1_2:armv7l",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     DOCKER_PLATFORM: "linux/arm/v7",
+          #     BUILD_ARGS: "PYCA_RELEASE=musllinux_1_2_armv7l",
+          #     RUNNER: "ubuntu-24.04-arm",
+          #   }
 
-          # ppc64le manylinux images
+          # # ppc64le manylinux images
+          # - {
+          #     TAG_NAME: "cryptography-manylinux_2_28:ppc64le",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux_2_28_ppc64le",
+          #     RUNNER: "ubuntu-24.04-ppc64le",
+          #   }
+          # - {
+          #     TAG_NAME: "cryptography-manylinux_2_34:ppc64le",
+          #     DOCKERFILE_PATH: "cryptography-linux",
+          #     DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
+          #     BUILD_ARGS: "PYCA_RELEASE=manylinux_2_34_ppc64le",
+          #     RUNNER: "ubuntu-24.04-ppc64le",
+          #   }
           - {
-              TAG_NAME: "cryptography-manylinux_2_28:ppc64le",
+              TAG_NAME: "cryptography-manylinux_2_39:riscv64",
               DOCKERFILE_PATH: "cryptography-linux",
               DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_28_ppc64le",
-              RUNNER: "ubuntu-24.04-ppc64le",
+              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_39_riscv64",
+              DOCKER_PLATFORM: "linux/riscv64",
+              RUNNER: "ubuntu-24.04",
             }
-          - {
-              TAG_NAME: "cryptography-manylinux_2_34:ppc64le",
-              DOCKERFILE_PATH: "cryptography-linux",
-              DOCKERFILE_WITH_NODEJS_PATH: "cryptography-linux-nodejs",
-              BUILD_ARGS: "PYCA_RELEASE=manylinux_2_34_ppc64le",
-              RUNNER: "ubuntu-24.04-ppc64le",
-            }
-
     name: "${{ matrix.IMAGE.TAG_NAME }}"
     steps:
       - uses: actions/checkout@v5.0.0
@@ -164,6 +171,11 @@ jobs:
         run: |
           ATTEST_IMAGE=$(echo "${{ matrix.IMAGE.TAG_NAME }}" | cut -d ':' -f 1)
           echo "ATTEST_IMAGE=${ATTEST_IMAGE}" | tee -a "$GITHUB_OUTPUT"
+
+      - # Add support for more platforms with QEMU (optional)
+        # https://github.com/docker/setup-qemu-action
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
